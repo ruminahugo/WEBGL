@@ -1,0 +1,15 @@
+{
+    "name": "threejs-sensor-map",
+    "version": "1.0.0",
+    "description": "3D sensor visualization using Three.js",
+    "main": "main.js",
+    "scripts": {
+      "start": "http-server"
+    },
+    "dependencies": {
+      "three": "0.128.0"
+    },
+    "devDependencies": {},
+    "type": "module"
+  }
+  
