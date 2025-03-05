@@ -4,12 +4,12 @@
     "description": "3D sensor visualization using Three.js",
     "main": "main.js",
     "scripts": {
-      "start": "http-server"
+      "start": "npx http-server -p 8080"
     },
     "dependencies": {
-      "three": "0.128.0"
+      "three": "0.128.0",
+      "http-server": "14.1.1"
     },
-    "devDependencies": {},
     "type": "module"
   }
   
