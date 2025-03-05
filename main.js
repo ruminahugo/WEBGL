@@ -1,4 +1,5 @@
-import * as THREE from 'three';
+<script type="module">
+import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.min.js';
 
 // Tạo scene, camera và renderer
 const scene = new THREE.Scene();
@@ -37,3 +38,4 @@ function animate() {
     renderer.render(scene, camera);
 }
 animate();
+</script>
