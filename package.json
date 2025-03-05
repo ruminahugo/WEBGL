@@ -1,15 +1,18 @@
 {
     "name": "threejs-sensor-map",
     "version": "1.0.0",
-    "description": "3D sensor visualization using Three.js",
+    "description": "3D sensor visualization using Three.js and Vite",
     "main": "main.js",
     "scripts": {
-      "start": "npx http-server"
+      "build": "vite build",
+      "start": "npx http-server dist -p $PORT"
     },
     "dependencies": {
-      "three": "0.128.0",
-      "http-server": "14.1.1",
-      "vite": "4.4.9"
+      "three": "0.128.0"
+    },
+    "devDependencies": {
+      "vite": "4.4.9",
+      "http-server": "14.1.1"
     },
     "type": "module"
   }
