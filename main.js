@@ -1,13 +1,23 @@
 import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.min.js';
+import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.128/examples/jsm/controls/OrbitControls.js';
 
-// Tạo scene, camera và renderer
+// Khởi tạo Scene, Camera, Renderer
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// Tạo tòa nhà (hình hộp)
+// Thêm OrbitControls để điều khiển camera
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true; // Hiệu ứng quán tính khi xoay
+controls.dampingFactor = 0.05;
+controls.screenSpacePanning = false;
+controls.minDistance = 5;  // Giới hạn zoom gần
+controls.maxDistance = 50; // Giới hạn zoom xa
+controls.maxPolarAngle = Math.PI / 2; // Giữ camera không quay xuống dưới sàn
+
+// Tạo mô hình tòa nhà
 const buildingGeometry = new THREE.BoxGeometry(10, 20, 10);
 const buildingMaterial = new THREE.MeshBasicMaterial({ color: 0x888888, wireframe: true });
 const building = new THREE.Mesh(buildingGeometry, buildingMaterial);
@@ -23,17 +33,28 @@ function createSensor(x, y, z, color = 0xff0000) {
     return sensor;
 }
 
-// Thêm một số cảm biến vào tòa nhà
+// Thêm một số cảm biến
 const sensors = [
-    createSensor(-3, 5, -3),  // Cảm biến tầng 1
-    createSensor(2, 10, 2),   // Cảm biến tầng 2
-    createSensor(-2, 15, 3),  // Cảm biến tầng 3
+    createSensor(-3, 5, -3),
+    createSensor(2, 10, 2),
+    createSensor(-2, 15, 3),
 ];
 
-// Đặt vị trí camera và render
-camera.position.z = 25;
+// Đặt vị trí camera
+camera.position.set(15, 15, 25);
+controls.update(); // Cập nhật vị trí camera
+
+// Render loop
 function animate() {
     requestAnimationFrame(animate);
+    controls.update(); // Cập nhật điều khiển camera
     renderer.render(scene, camera);
 }
 animate();
+
+// Đảm bảo canvas cập nhật khi thay đổi kích thước cửa sổ
+window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+});
