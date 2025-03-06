@@ -77,7 +77,7 @@ function createSensor(x, y, z, color = 0xff0000) {
 const sensors = [
     createSensor(-10, 5, -10), // Xa tường
     createSensor(10, 5, 10),   // Xa tường
-    createSensor(0, 3.5, -8),     // Giữa sân trường
+    createSensor(0, 3.5, -10),     // Giữa sân trường
 ];
 
 
