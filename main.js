@@ -19,7 +19,7 @@ controls.maxDistance = 50; // Giới hạn zoom xa
 controls.maxPolarAngle = Math.PI / 2; // Giữ camera không quay xuống dưới sàn
 
 // Tạo mô hình tòa nhà
-const wallMaterial = new THREE.MeshStandardMaterial({ color: 0x8B4513, transparent: true, opacity: 0.3 }); // Màu tường
+const wallMaterial = new THREE.MeshStandardMaterial({ color: 0x8B4513, transparent: true, opacity: 0.4 }); // Màu tường
 
 // Hàm tạo tường
 function createWall(width, height, depth, position) {
@@ -38,7 +38,7 @@ createWall(2, 10, 30, { x: 15, y: 5, z: 0 });  // Tường phải
 //Sàn tầng 2
 createWall(30, 0.2, 30, { x: 0, y: 5, z: 0 });
 
-const roomMaterial = new THREE.MeshStandardMaterial({ color: 0xFFD700, transparent: true, opacity: 0.3 }); // Màu phòng học
+const roomMaterial = new THREE.MeshStandardMaterial({ color: 0xFFD700, transparent: true, opacity: 0.4 }); // Màu phòng học
 
 // Hàm tạo phòng học
 function createRoom(width, height, depth, position) {
