@@ -19,7 +19,7 @@ controls.maxDistance = 50; // Giới hạn zoom xa
 controls.maxPolarAngle = Math.PI / 2; // Giữ camera không quay xuống dưới sàn
 
 // Tạo mô hình tòa nhà
-const wallMaterial = new THREE.MeshStandardMaterial({ color: 0x8B4513 }); // Màu tường
+const wallMaterial = new THREE.MeshStandardMaterial({ color: 0x8B4513, transparent: true, opacity: 0.3 }); // Màu tường
 
 // Hàm tạo tường
 function createWall(width, height, depth, position) {
@@ -63,7 +63,7 @@ scene.add(ambientLight);
 
 // Tạo cảm biến (hình cầu nhỏ)
 function createSensor(x, y, z, color = 0xff0000) {
-    const sensorGeometry = new THREE.SphereGeometry(0.5, 16, 16);
+    const sensorGeometry = new THREE.SphereGeometry(0.3, 16, 16);
     const sensorMaterial = new THREE.MeshStandardMaterial({ color: color, emissive: color });
     const sensor = new THREE.Mesh(sensorGeometry, sensorMaterial);
     sensor.position.set(x, y, z);
