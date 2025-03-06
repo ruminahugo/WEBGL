@@ -48,12 +48,19 @@ function createRoom(width, height, depth, position) {
     scene.add(room);
 }
 
-// Tạo một số phòng
+// Tạo một số phòng tầng 1
 createRoom(4, 4, 4, { x: -10, y: 2, z: -10 });
 createRoom(4, 4, 4, { x: -5, y: 2, z: -10 });
 createRoom(4, 4, 4, { x: 0, y: 2, z: -10 });
 createRoom(4, 4, 4, { x: 5, y: 2, z: -10 });
 createRoom(4, 4, 4, { x: 10, y: 2, z: -10 });
+
+// Tạo một số phòng tầng 2
+createRoom(4, 4, 4, { x: -10, y: 6, z: -10 });
+createRoom(4, 4, 4, { x: -5, y: 6, z: -10 });
+createRoom(4, 4, 4, { x: 0, y: 6, z: -10 });
+createRoom(4, 4, 4, { x: 5, y: 6, z: -10 });
+createRoom(4, 4, 4, { x: 10, y: 6, z: -10 });
 
 // Tạo mặt đất
 const groundGeometry = new THREE.PlaneGeometry(50, 50);
