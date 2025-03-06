@@ -46,11 +46,11 @@ function createRoom(width, height, depth, position) {
 }
 
 // Tạo một số phòng
-createRoom(4, 4, 4, { x: -10, y: 4, z: 0 });
-createRoom(4, 4, 4, { x: -5, y: 4, z: 0 });
-createRoom(4, 4, 4, { x: 0, y: 4, z: 0 });
-createRoom(4, 4, 4, { x: 5, y: 4, z: 0 });
-createRoom(4, 4, 4, { x: 10, y: 4, z: 0 });
+createRoom(4, 4, 4, { x: -10, y: 2, z: -10 });
+createRoom(4, 4, 4, { x: -5, y: 2, z: -10 });
+createRoom(4, 4, 4, { x: 0, y: 2, z: -10 });
+createRoom(4, 4, 4, { x: 5, y: 2, z: -10 });
+createRoom(4, 4, 4, { x: 10, y: 2, z: -10 });
 
 // Tạo mặt đất
 const groundGeometry = new THREE.PlaneGeometry(50, 50);
