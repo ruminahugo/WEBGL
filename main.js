@@ -35,6 +35,9 @@ createWall(30, 10, 2, { x: 0, y: 5, z: -15 }); // Tường dưới
 createWall(2, 10, 30, { x: -15, y: 5, z: 0 }); // Tường trái
 createWall(2, 10, 30, { x: 15, y: 5, z: 0 });  // Tường phải
 
+//Sàn tầng 2
+createWall(30, 1, 30, { x: 0, y: 5, z: 0 });
+
 const roomMaterial = new THREE.MeshStandardMaterial({ color: 0xFFD700, transparent: true, opacity: 0.3 }); // Màu phòng học
 
 // Hàm tạo phòng học
