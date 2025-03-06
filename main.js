@@ -57,10 +57,14 @@ const ground = new THREE.Mesh(groundGeometry, groundMaterial);
 ground.rotation.x = -Math.PI / 2;
 scene.add(ground);
 
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+scene.add(ambientLight);
+
+
 // Tạo cảm biến (hình cầu nhỏ)
 function createSensor(x, y, z, color = 0xff0000) {
     const sensorGeometry = new THREE.SphereGeometry(0.5, 16, 16);
-    const sensorMaterial = new THREE.MeshBasicMaterial({ color: color });
+    const sensorMaterial = new THREE.MeshStandardMaterial({ color: color, emissive: color });
     const sensor = new THREE.Mesh(sensorGeometry, sensorMaterial);
     sensor.position.set(x, y, z);
     scene.add(sensor);
@@ -69,10 +73,11 @@ function createSensor(x, y, z, color = 0xff0000) {
 
 // Thêm một số cảm biến
 const sensors = [
-    createSensor(-3, 5, -3),
-    createSensor(2, 10, 2),
-    createSensor(-2, 15, 3),
+    createSensor(-10, 5, -10), // Xa tường
+    createSensor(10, 5, 10),   // Xa tường
+    createSensor(0, 8, 0),     // Giữa sân trường
 ];
+
 
 // Đặt vị trí camera
 camera.position.set(15, 15, 25);
