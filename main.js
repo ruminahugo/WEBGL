@@ -19,10 +19,43 @@ controls.maxDistance = 50; // Giới hạn zoom xa
 controls.maxPolarAngle = Math.PI / 2; // Giữ camera không quay xuống dưới sàn
 
 // Tạo mô hình tòa nhà
-const buildingGeometry = new THREE.BoxGeometry(10, 20, 10);
-const buildingMaterial = new THREE.MeshBasicMaterial({ color: 0x888888, wireframe: true });
-const building = new THREE.Mesh(buildingGeometry, buildingMaterial);
-scene.add(building);
+const wallMaterial = new THREE.MeshStandardMaterial({ color: 0x8B4513 }); // Màu tường
+
+// Hàm tạo tường
+function createWall(width, height, depth, position) {
+    const geometry = new THREE.BoxGeometry(width, height, depth);
+    const wall = new THREE.Mesh(geometry, wallMaterial);
+    wall.position.set(position.x, position.y, position.z);
+    scene.add(wall);
+    return wall;
+}
+
+// Tạo các bức tường hình chữ U
+createWall(30, 10, 2, { x: 0, y: 5, z: -15 }); // Tường dưới
+createWall(2, 10, 30, { x: -15, y: 5, z: 0 }); // Tường trái
+createWall(2, 10, 30, { x: 15, y: 5, z: 0 });  // Tường phải
+
+const roomMaterial = new THREE.MeshStandardMaterial({ color: 0xFFD700 }); // Màu phòng học
+
+// Hàm tạo phòng học
+function createRoom(width, height, depth, position) {
+    const geometry = new THREE.BoxGeometry(width, height, depth);
+    const room = new THREE.Mesh(geometry, roomMaterial);
+    room.position.set(position.x, position.y, position.z);
+    scene.add(room);
+}
+
+// Tạo một số phòng
+createRoom(8, 8, 8, { x: -10, y: 4, z: -5 });
+createRoom(8, 8, 8, { x: 0, y: 4, z: -5 });
+createRoom(8, 8, 8, { x: 10, y: 4, z: -5 });
+
+// Tạo mặt đất
+const groundGeometry = new THREE.PlaneGeometry(50, 50);
+const groundMaterial = new THREE.MeshStandardMaterial({ color: 0x228B22 });
+const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+ground.rotation.x = -Math.PI / 2;
+scene.add(ground);
 
 // Tạo cảm biến (hình cầu nhỏ)
 function createSensor(x, y, z, color = 0xff0000) {
