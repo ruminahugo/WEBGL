@@ -36,7 +36,7 @@ createWall(2, 10, 30, { x: -15, y: 5, z: 0 }); // Tường trái
 createWall(2, 10, 30, { x: 15, y: 5, z: 0 });  // Tường phải
 
 //Sàn tầng 2
-createWall(30, 1, 30, { x: 0, y: 5, z: 0 });
+createWall(30, 0.2, 30, { x: 0, y: 5, z: 0 });
 
 const roomMaterial = new THREE.MeshStandardMaterial({ color: 0xFFD700, transparent: true, opacity: 0.3 }); // Màu phòng học
 
@@ -56,11 +56,11 @@ createRoom(4, 4, 4, { x: 5, y: 2, z: -10 });
 createRoom(4, 4, 4, { x: 10, y: 2, z: -10 });
 
 // Tạo một số phòng tầng 2
-createRoom(4, 4, 4, { x: -10, y: 8, z: -10 });
-createRoom(4, 4, 4, { x: -5, y: 8, z: -10 });
-createRoom(4, 4, 4, { x: 0, y: 8, z: -10 });
-createRoom(4, 4, 4, { x: 5, y: 8, z: -10 });
-createRoom(4, 4, 4, { x: 10, y: 8, z: -10 });
+createRoom(4, 4, 4, { x: -10, y: 7, z: -10 });
+createRoom(4, 4, 4, { x: -5, y: 7, z: -10 });
+createRoom(4, 4, 4, { x: 0, y: 7, z: -10 });
+createRoom(4, 4, 4, { x: 5, y: 7, z: -10 });
+createRoom(4, 4, 4, { x: 10, y: 7, z: -10 });
 
 // Tạo mặt đất
 const groundGeometry = new THREE.PlaneGeometry(50, 50);
