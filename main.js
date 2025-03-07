@@ -93,10 +93,11 @@ const labelRenderer = new CSS2DRenderer();
 labelRenderer.setSize(window.innerWidth, window.innerHeight);
 labelRenderer.domElement.style.position = "absolute";
 labelRenderer.domElement.style.top = "0px";
+labelRenderer.domElement.style.pointerEvents = "none";
 document.body.appendChild(labelRenderer.domElement);
 
 // Hàm tạo label
-function createLabel(text, parent) {
+function createLabel(text, targetObject) {
     const div = document.createElement("div");
     div.className = "sensor-label";
     div.textContent = text;
@@ -107,7 +108,9 @@ function createLabel(text, parent) {
     div.style.borderRadius = "5px";
 
     const label = new CSS2DObject(div);
-    parent.add(label); // Gán label vào sensor để tự động cập nhật vị trí
+    label.position.copy(targetObject.position); // Gán vị trí ban đầu
+    scene.add(label);
+
     return label;
 }
 
@@ -117,7 +120,7 @@ createSensor(10, 5, 10, "SENSOR_2");   // Xa tường
 createSensor(0, 3.5, -10, "SENSOR_3");     // Giữa sân trường
 
 const a = sensorMap.find(s=>s.id==="SENSOR_1");
-createLabel(a.id, a.mesh.position);
+createLabel(a.id, a.mesh);
 
 
 // Đặt vị trí camera
@@ -129,8 +132,9 @@ function animate() {
     requestAnimationFrame(animate);
     controls.update();
     renderer.render(scene, camera);
-    labelRenderer.render(scene, camera); // Render label riêng biệt
+    labelRenderer.render(scene, camera); // Luôn cập nhật labelRenderer
 }
+
 animate();
 
 // Đảm bảo canvas cập nhật khi thay đổi kích thước cửa sổ
