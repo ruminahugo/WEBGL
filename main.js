@@ -101,7 +101,7 @@ function createLabel(text, targetObject) {
     const div = document.createElement("div");
     div.className = "sensor-label";
     div.textContent = text;
-    div.style.fontSize = "14px";
+    div.style.fontSize = "10px";
     div.style.color = "white";
     div.style.padding = "5px";
     div.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
