@@ -118,7 +118,7 @@ createSensor(-10, 8.5, -10, "SENSOR_1"), // Xa tường
 createSensor(10, 5, 10, "SENSOR_2"),   // Xa tường
 createSensor(0, 3.5, -10, "SENSOR_3"),     // Giữa sân trường
 
-createLabel(sensorMap["SENSOR_1"].id, sensorMap["SENSOR_1"].position);
+createLabel("SENSOR_1", sensorMap["SENSOR_1"].position);
 
 
 // Đặt vị trí camera
