@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { CSS2DRenderer, CSS2DObject } from "three/addons/renderers/CSS2DRenderer.js";
 
 
 // Khởi tạo Scene, Camera, Renderer
@@ -74,21 +75,50 @@ scene.add(ambientLight);
 
 
 // Tạo cảm biến (hình cầu nhỏ)
-function createSensor(x, y, z, color = 0xff0000) {
-    const sensorGeometry = new THREE.SphereGeometry(0.3, 16, 16);
+const sensorMap = {}; // Lưu danh sách cảm biến với ID làm key
+
+function createSensor(x, y, z, id, color = 0xff0000) {
+    const sensorGeometry = new THREE.SphereGeometry(1.5, 16, 16);
     const sensorMaterial = new THREE.MeshStandardMaterial({ color: color, emissive: color });
     const sensor = new THREE.Mesh(sensorGeometry, sensorMaterial);
+
     sensor.position.set(x, y, z);
     scene.add(sensor);
+    
+    sensorMap[id] = sensor; // Gán vào danh sách quản lý
     return sensor;
 }
 
+// Tạo CSS2DRenderer để hiển thị label
+const labelRenderer = new CSS2DRenderer();
+labelRenderer.setSize(window.innerWidth, window.innerHeight);
+labelRenderer.domElement.style.position = "absolute";
+labelRenderer.domElement.style.top = "0px";
+document.body.appendChild(labelRenderer.domElement);
+
+// Hàm tạo label
+function createLabel(text, position) {
+    const div = document.createElement("div");
+    div.className = "sensor-label";
+    div.textContent = text;
+    div.style.fontSize = "14px";
+    div.style.color = "white";
+    div.style.padding = "5px";
+    div.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+    div.style.borderRadius = "5px";
+
+    const label = new CSS2DObject(div);
+    label.position.set(position.x, position.y, position.z);
+    scene.add(label);
+    return label;
+}
+
 // Thêm một số cảm biến
-const sensors = [
-    createSensor(-10, 8.5, -10), // Xa tường
-    createSensor(10, 5, 10),   // Xa tường
-    createSensor(0, 3.5, -10),     // Giữa sân trường
-];
+createSensor(-10, 8.5, -10, "SENSOR_1"), // Xa tường
+createSensor(10, 5, 10, "SENSOR_2"),   // Xa tường
+createSensor(0, 3.5, -10, "SENSOR_3"),     // Giữa sân trường
+
+createLabel(sensorMap["SENSOR_1"].id, sensorMap["SENSOR_1"].position);
 
 
 // Đặt vị trí camera
