@@ -78,7 +78,7 @@ scene.add(ambientLight);
 const sensorMap = []; // Lưu danh sách cảm biến với ID làm key
 
 function createSensor(x, y, z, id, color = 0xff0000) {
-    const sensorGeometry = new THREE.SphereGeometry(1.5, 16, 16);
+    const sensorGeometry = new THREE.SphereGeometry(0.3, 16, 16);
     const sensorMaterial = new THREE.MeshStandardMaterial({ color: color, emissive: color });
     const sensor = new THREE.Mesh(sensorGeometry, sensorMaterial);
 
