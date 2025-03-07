@@ -146,7 +146,7 @@ window.addEventListener('resize', () => {
 
 
 async function getDownSensors() {
-    const response = await fetch("https://s16tc-prtg1-vp.vingroup.local/api/table.json?id=20694&content=sensors&columns=objid,device,host,name,status&filter_status=5&username=Admin.tannm11&passhash=Tan@0398017585");
+    const response = await fetch("https://s16tc-prtg1-vp.vingroup.local/api/table.json?id=20694&content=sensors&columns=objid,device,host,name,status&filter_status=5");
     const data = await response.json();
     console.log(data);
 }
