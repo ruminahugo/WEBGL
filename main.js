@@ -96,7 +96,7 @@ labelRenderer.domElement.style.top = "0px";
 document.body.appendChild(labelRenderer.domElement);
 
 // Hàm tạo label
-function createLabel(text, position) {
+function createLabel(text, parent) {
     const div = document.createElement("div");
     div.className = "sensor-label";
     div.textContent = text;
@@ -107,8 +107,7 @@ function createLabel(text, position) {
     div.style.borderRadius = "5px";
 
     const label = new CSS2DObject(div);
-    label.position.set(position.x, position.y, position.z);
-    scene.add(label);
+    parent.add(label); // Gán label vào sensor để tự động cập nhật vị trí
     return label;
 }
 
@@ -118,7 +117,7 @@ createSensor(10, 5, 10, "SENSOR_2");   // Xa tường
 createSensor(0, 3.5, -10, "SENSOR_3");     // Giữa sân trường
 
 const a = sensorMap.find(s=>s.id==="SENSOR_1");
-createLabel(a.id, a.position);
+createLabel(a.id, a.mesh.position);
 
 
 // Đặt vị trí camera
