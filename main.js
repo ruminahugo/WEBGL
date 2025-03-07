@@ -75,17 +75,18 @@ scene.add(ambientLight);
 
 
 // Tạo cảm biến (hình cầu nhỏ)
-const sensors = [];
+const sensorMap = {}; // Lưu danh sách cảm biến với ID làm key
 
 function createSensor(x, y, z, id, color = 0xff0000) {
     const sensorGeometry = new THREE.SphereGeometry(1.5, 16, 16);
     const sensorMaterial = new THREE.MeshStandardMaterial({ color: color, emissive: color });
     const sensor = new THREE.Mesh(sensorGeometry, sensorMaterial);
-    
+
     sensor.position.set(x, y, z);
     scene.add(sensor);
     
-    sensors.push({ id: id, mesh: sensor }); // Lưu ID và Mesh vào mảng
+    sensorMap[id] = sensor; // Gán vào danh sách quản lý
+    return sensor;
 }
 
 // Tạo CSS2DRenderer để hiển thị label
@@ -114,11 +115,10 @@ function createLabel(text, position) {
 
 // Thêm một số cảm biến
 createSensor(-10, 8.5, -10, "SENSOR_1"); // Xa tường
-createSensor(10, 5, 10, "SENSOR_2"); // Xa tường
+createSensor(10, 5, 10, "SENSOR_2");   // Xa tường
 createSensor(0, 3.5, -10, "SENSOR_3");     // Giữa sân trường
 
-const b = sensors.find(s=>s.id==="SENSOR_1");
-createLabel(a.id, a.position);
+createLabel(sensorMap["SENSOR_1"].id, sensorMap["SENSOR_1"].position);
 
 
 // Đặt vị trí camera
