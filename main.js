@@ -102,9 +102,9 @@ function createLabel(text, targetObject) {
     div.className = "sensor-label";
     div.textContent = text;
     div.style.fontSize = "10px";
-    div.style.color = "white";
+    div.style.color = "rgba(250, 250, 250, 0.4)";
     div.style.padding = "5px";
-    div.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+    div.style.backgroundColor = "rgba(0, 0, 0, 0.2)";
     div.style.borderRadius = "5px";
 
     const label = new CSS2DObject(div);
