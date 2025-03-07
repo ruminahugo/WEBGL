@@ -125,11 +125,12 @@ createLabel(sensorMap["SENSOR_1"].id, sensorMap["SENSOR_1"].position);
 camera.position.set(15, 15, 25);
 controls.update(); // Cập nhật vị trí camera
 
-// Render loop
+// Cập nhật vị trí camera khi render
 function animate() {
     requestAnimationFrame(animate);
-    controls.update(); // Cập nhật điều khiển camera
+    controls.update();
     renderer.render(scene, camera);
+    labelRenderer.render(scene, camera); // Render label riêng biệt
 }
 animate();
 
