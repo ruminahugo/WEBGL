@@ -148,7 +148,7 @@ window.addEventListener('resize', () => {
 async function getDownSensors() {
     const response = await fetch("https://s16tc-prtg1-vp.vingroup.local/api/table.json?id=20694&content=sensors&columns=objid,device,host,name,status&filter_status=5",
         {
-            method: "GET",
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
