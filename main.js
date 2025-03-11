@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { CSS2DRenderer, CSS2DObject } from "three/addons/renderers/CSS2DRenderer.js";
+import axios from "axios";
 
 
 // Khởi tạo Scene, Camera, Renderer
@@ -146,16 +147,21 @@ window.addEventListener('resize', () => {
 
 
 async function getDownSensors() {
-    const response = await fetch("https://s16tc-prtg1-vp.vingroup.local/api/table.json?id=20694&content=sensors&columns=objid,device,host,name,status&filter_status=5",
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            mode: "cors"
-        }
-    ).then(response => response.json())
-    .then(data => console.log(data));
+    try {
+        const response = await axios.get(
+            "https://s16tc-prtg1-vp.vingroup.local/api/table.json?id=20694&content=sensors&columns=objid,device,host,name,status&filter_status=5",
+            {}, // Dữ liệu body (để trống nếu không có)
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                withCredentials: true, // Tương đương `mode: "cors"` nếu cần gửi cookie
+            }
+        );
+        console.log(response.data);
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
 }
 
 // Gọi API mỗi 10 giây
