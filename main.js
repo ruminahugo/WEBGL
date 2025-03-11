@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { CSS2DRenderer, CSS2DObject } from "three/addons/renderers/CSS2DRenderer.js";
-import axios from "axios";
+const { exec } = require("child_process");
 
 
 // Khởi tạo Scene, Camera, Renderer
@@ -145,23 +145,29 @@ window.addEventListener('resize', () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
+const url = "https://s16tc-prtg1-vp.vingroup.local/api/table.json?id=20694&content=sensors&columns=objid,device,host,name,status&filter_status=5&user=admin.tannm11&passhash=Tan@0398017585";
 
-async function getDownSensors() {
-    try {
-        const response = await axios.get(
-            "https://s16tc-prtg1-vp.vingroup.local/api/table.json?id=20694&content=sensors&columns=objid,device,host,name,status&filter_status=5&user=admin.tannm11&passhash=Tan@0398017585",
-            {}, // Dữ liệu body (để trống nếu không có)
-            {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                withCredentials: true, // Tương đương `mode: "cors"` nếu cần gửi cookie
-            }
-        );
-        console.log(response.data);
-    } catch (error) {
-        console.error("Error fetching data:", error);
+// Tạo lệnh curl
+const curlCommand = `curl -X GET "${url}" -H "Content-Type: application/json"`;
+async function getDownSensors() {   
+
+exec(curlCommand, (error, stdout, stderr) => {
+    if (error) {
+        console.error(`Error executing curl: ${error.message}`);
+        return;
     }
+    if (stderr) {
+        console.error(`Curl stderr: ${stderr}`);
+        return;
+    }
+
+    try {
+        const data = JSON.parse(stdout);
+        console.log("Response:", data);
+    } catch (parseError) {
+        console.error("Error parsing JSON:", parseError);
+    }
+});
 }
 
 // Gọi API mỗi 10 giây
