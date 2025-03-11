@@ -149,7 +149,7 @@ window.addEventListener('resize', () => {
 async function getDownSensors() {
     try {
         const response = await axios.get(
-            "https://s16tc-prtg1-vp.vingroup.local/api/table.json?id=20694&content=sensors&columns=objid,device,host,name,status&filter_status=5",
+            "https://s16tc-prtg1-vp.vingroup.local/api/table.json?id=20694&content=sensors&columns=objid,device,host,name,status&filter_status=5&user=admin.tannm11&passhash=Tan@0398017585",
             {}, // Dữ liệu body (để trống nếu không có)
             {
                 headers: {
