@@ -170,5 +170,3 @@ socket.on("disconnect", () => {
     console.log("Disconnected from WebSocket server");
 });
 
-// Gọi API mỗi 10 giây
-setInterval(getDownSensors, 10000);

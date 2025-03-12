@@ -28,7 +28,7 @@ const API_PARAMS = {
 
 async function fetchDownSensors() {
     try {
-        const response = await axios.get(SENSOR_API_URL, { params: API_PARAMS });
+        const response = await axios.post(SENSOR_API_URL, { params: API_PARAMS });
         return response.data;
     } catch (error) {
         console.error("Error fetching sensor data:", error);
