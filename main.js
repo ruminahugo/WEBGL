@@ -1,7 +1,8 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { CSS2DRenderer, CSS2DObject } from "three/addons/renderers/CSS2DRenderer.js";
-const { exec } = require("child_process");
+import { io } from "socket.io-client";
+const socket = io("https://webgl-production.up.railway.app:3000/");
 
 
 // Khởi tạo Scene, Camera, Renderer
@@ -145,30 +146,29 @@ window.addEventListener('resize', () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-const url = "https://s16tc-prtg1-vp.vingroup.local/api/table.json?id=20694&content=sensors&columns=objid,device,host,name,status&filter_status=5&user=admin.tannm11&passhash=Tan@0398017585";
-
-// Tạo lệnh curl
-const curlCommand = `curl -X GET "${url}" -H "Content-Type: application/json"`;
-async function getDownSensors() {   
-
-exec(curlCommand, (error, stdout, stderr) => {
-    if (error) {
-        console.error(`Error executing curl: ${error.message}`);
-        return;
-    }
-    if (stderr) {
-        console.error(`Curl stderr: ${stderr}`);
-        return;
-    }
-
-    try {
-        const data = JSON.parse(stdout);
-        console.log("Response:", data);
-    } catch (parseError) {
-        console.error("Error parsing JSON:", parseError);
-    }
+socket.on("connect", () => {
+    console.log("Connected to WebSocket server");
+    
+    // Gửi yêu cầu lấy dữ liệu cảm biến ban đầu
+    socket.emit("getSensors");
 });
-}
+
+// Lắng nghe dữ liệu cảm biến từ server
+socket.on("sensorData", (data) => {
+    console.log("Received sensor data:", data);
+
+    // Cập nhật màu cảm biến dựa trên dữ liệu nhận được
+    data.sensors.forEach(sensor => {
+        const foundSensor = sensorMap.find(s => s.id === sensor.name);
+        if (foundSensor) {
+            foundSensor.mesh.material.color.set(sensor.status === "down" ? 0xff0000 : 0x00ff00);
+        }
+    });
+});
+
+socket.on("disconnect", () => {
+    console.log("Disconnected from WebSocket server");
+});
 
 // Gọi API mỗi 10 giây
 setInterval(getDownSensors, 10000);
