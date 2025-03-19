@@ -2,7 +2,7 @@
     "name": "threejs-sensor-map",
     "version": "1.0.0",
     "description": "3D sensor visualization using Three.js and Vite",
-    "main": "main.js",
+    "main": "index.html",
     "scripts": {
       //"build": "vite build",
       //"start": "node server.js"
