@@ -17,12 +17,9 @@
      "axios": "^1.6.2",
      "cors": "^2.8.5"
     },
-    "devDependencies": {git add .
-    git commit -m "Fix lỗi commit trong Codespaces"
-    git push
-    
-      "vite": "4.4.9",
-      "http-server": "14.1.1"
+    "devDependencies": {
+      //"vite": "4.4.9",
+      //"http-server": "14.1.1"
     },
     "type": "module"
   }
