@@ -4,8 +4,8 @@
     "description": "3D sensor visualization using Three.js and Vite",
     "main": "server.js",
     "scripts": {
-      "build": "vite build",
-      "start": "node server.js"
+      //"build": "vite build",
+      //"start": "node server.js"
     },
     "dependencies": {
       "three": "0.150.0",
@@ -17,7 +17,10 @@
      "axios": "^1.6.2",
      "cors": "^2.8.5"
     },
-    "devDependencies": {
+    "devDependencies": {git add .
+    git commit -m "Fix lỗi commit trong Codespaces"
+    git push
+    
       "vite": "4.4.9",
       "http-server": "14.1.1"
     },
